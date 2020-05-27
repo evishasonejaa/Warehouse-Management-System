@@ -1,0 +1,116 @@
+﻿@model WMS.SKU
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h5 class="text-primary">Delete SKU</h5>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="text-primary">
+            Client
+        </dt>
+
+        <dd class="text-primary">
+            @Model.client_name
+        </dd>
+        <dt class="text-primary">
+            SKU
+        </dt>
+
+        <dd class="text-primary">
+            @Model.SKU1
+            <br />
+            <img src="@Url.Content(Model.image_url)" alt="Image" height="90" width="90" />
+        </dd>
+
+        <dt class="text-primary">
+            Description
+        </dt>
+
+        <dd class="text-primary">
+            @Model.description
+        </dd>
+
+        <dt class="text-primary">
+            Length
+        </dt>
+
+        <dd class="text-primary">
+            @Model.length
+        </dd>
+
+        <dt class="text-primary">
+            Width
+        </dt>
+
+        <dd class="text-primary">
+            @Model.width
+        </dd>
+
+        <dt class="text-primary">
+            Height
+        </dt>
+
+        <dd class="text-primary">
+            @Model.height
+        </dd>
+
+        <dt class="text-primary">
+            Rate
+        </dt>
+
+        <dd class="text-primary">
+            @Model.rate
+        </dd>
+
+        <dt class="text-primary">
+            Supplier
+        </dt>
+
+        <dd class="text-primary">
+            @Model.supplier
+        </dd>
+
+        <dt class="text-primary">
+            Cost
+        </dt>
+
+        <dd class="text-primary">
+            @Model.cost
+        </dd>
+
+        <dt class="text-primary">
+            Category
+        </dt>
+
+        <dd class="text-primary">
+            @Model.category
+        </dd>
+
+        <dt class="text-primary">
+            Notes
+        </dt>
+
+        <dd class="text-primary">
+            @Model.notes
+        </dd>
+
+
+
+    </dl>
+    <form action="?SKU1=@Model.SKU1" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form">
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color col-md-offset-2">
+
+            <input type="submit" value="Delete" class="btn btn-primary" />
+
+        </div>
+    </form>
+</div>
+@Html.ActionLink("Back to List", "Index")

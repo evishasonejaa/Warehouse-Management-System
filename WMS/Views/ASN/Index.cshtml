@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WMS.tbl_asn>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <h5 class="text-primary">ASN List</h5>
+</div>
+<hr />
+<form action="Index" method="GET" data-toggle="validator" role="form">
+       <div class="row">
+        <div class="col-md-3">
+             @Html.ActionLink("Add New", "Create", "ASN", null, new { @class = "btn btn-success margin-bottom" })
+        </div>
+        <div class="col-md-2">
+            <select class="form-control"></select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control">
+                <option>Open</option>
+                <option>Close</option>
+            </select>
+        </div>
+        <div class="col-md-offset-2 ">
+            <input type="text" class="form-control" placeholder="Search..." />
+        </div>
+        
+    </div>
+</form>
+<hr>
+<table class="table table-striped">
+    <tr>
+        <th class="text-primary">
+            PO Number
+        </th>
+        <th class="text-primary">
+            Client
+        </th>
+        <th class="text-primary">
+            Arrival Date Time
+        </th>
+        <th class="text-primary">
+            Status
+        </th>
+        <th class="text-primary">
+            Edit
+        </th>
+        <th class="text-primary">
+            Recieve
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-primary">
+                <a href="@Url.Action("Details", "ASN",new { id = item.order })">
+                    @item.order
+                </a>
+            </td>
+            <td class="text-primary">
+                @item.client_name
+            </td>
+            <td class="text-primary">
+                @item.arr_date
+            </td>
+            <td class="text-primary"></td>
+            <td class="text-primary">
+                <a href="@Url.Action("Edit", "ASN",new { id = item.order })">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+            </td>
+            <td class="text-primary">
+                <i class="glyphicon glyphicon-circle-arrow-left"></i>
+            </td>
+
+        </tr>
+    }
+
+</table>
+

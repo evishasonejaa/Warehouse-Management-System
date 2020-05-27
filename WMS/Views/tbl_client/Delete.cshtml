@@ -1,0 +1,126 @@
+﻿@model WMS.tbl_client
+
+@{
+                /**/
+
+                ViewBag.Title = "Delete";
+}
+
+
+
+<h5 class="text-primary">Delete Client</h5>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="text-primary">
+            Contact Person
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.contact_person</span>
+        </dd>
+
+        <dt class="text-primary">
+            Phone No.
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.phone</span>
+        </dd>
+
+        <dt class="text-primary">
+            Email Id
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.email</span>
+        </dd>
+
+        <dt class="text-primary">
+            Consumer Email Id
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.consumer_email</span>
+        </dd>
+
+        <dt class="text-primary">
+            Claim Email Id
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.claim_email</span>
+        </dd>
+
+        <dt class="text-primary">
+            Fax No.
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.fax</span>
+        </dd>
+
+        <dt class="text-primary">
+            Address 1
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.add_1</span>
+        </dd>
+
+        <dt class="text-primary">
+            Address 2
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.add_2</span>
+        </dd>
+
+        <dt class="text-primary">
+            City
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.city</span>
+        </dd>
+
+        <dt class="text-primary">
+            Province
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.province</span>
+        </dd>
+
+        <dt class="text-primary">
+            Country
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.country</span>
+        </dd>
+
+        <dt class="text-primary">
+            Zip Code
+        </dt>
+
+        <dd class="text-primary">
+            <span> @Model.zip</span>
+        </dd>
+
+    </dl>
+
+    <form action="?SKU1=@Model.client_name" method="POST" data-toggle="validator" role="form">
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color col-md-offset-2 ">
+
+            <input type="submit" value="Delete" class="btn btn-primary" />
+
+
+        </div>
+
+    </form>
+</div>
+@Html.ActionLink("Back to List", "Index")

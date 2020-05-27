@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WMS_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SKU">
+          <Key>
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="client_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="SKU" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="length" Type="float" />
+          <Property Name="width" Type="float" />
+          <Property Name="height" Type="float" />
+          <Property Name="rate" Type="float" />
+          <Property Name="supplier" Type="nchar" MaxLength="50" />
+          <Property Name="cost" Type="money" />
+          <Property Name="category" Type="nchar" MaxLength="20" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="image_url" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_asn">
+          <Key>
+            <PropertyRef Name="order" />
+          </Key>
+          <Property Name="client_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="arr_date" Type="date" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_client">
+          <Key>
+            <PropertyRef Name="client_name" />
+          </Key>
+          <Property Name="client_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact_person" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="consumer_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="claim_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="add_1" Type="nvarchar(max)" />
+          <Property Name="add_2" Type="nvarchar(max)" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="province" Type="nvarchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="zip" Type="int" />
+        </EntityType>
+        <Association Name="FK">
+          <End Role="tbl_client" Type="Self.tbl_client" Multiplicity="0..1" />
+          <End Role="SKU" Type="Self.SKU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client">
+              <PropertyRef Name="client_name" />
+            </Principal>
+            <Dependent Role="SKU">
+              <PropertyRef Name="client_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_asn_tbl_client">
+          <End Role="tbl_client" Type="Self.tbl_client" Multiplicity="1" />
+          <End Role="tbl_asn" Type="Self.tbl_asn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client">
+              <PropertyRef Name="client_name" />
+            </Principal>
+            <Dependent Role="tbl_asn">
+              <PropertyRef Name="client_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WMS_dbModelStoreContainer">
+          <EntitySet Name="SKU" EntityType="Self.SKU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_asn" EntityType="Self.tbl_asn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_client" EntityType="Self.tbl_client" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="tbl_client" EntitySet="tbl_client" />
+            <End Role="SKU" EntitySet="SKU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_asn_tbl_client" Association="Self.FK_tbl_asn_tbl_client">
+            <End Role="tbl_client" EntitySet="tbl_client" />
+            <End Role="tbl_asn" EntitySet="tbl_asn" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WMS_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SKU">
+          <Key>
+            <PropertyRef Name="SKU1" />
+          </Key>
+          <Property Name="client_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SKU1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="length" Type="Double" />
+          <Property Name="width" Type="Double" />
+          <Property Name="height" Type="Double" />
+          <Property Name="rate" Type="Double" />
+          <Property Name="supplier" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="category" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_client" Relationship="Self.FK" FromRole="SKU" ToRole="tbl_client" />
+        </EntityType>
+        <EntityType Name="tbl_client">
+          <Key>
+            <PropertyRef Name="client_name" />
+          </Key>
+          <Property Name="client_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contact_person" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="consumer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="claim_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="add_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="add_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zip" Type="Int32" />
+          <NavigationProperty Name="SKUs" Relationship="Self.FK" FromRole="tbl_client" ToRole="SKU" />
+          <NavigationProperty Name="tbl_asn" Relationship="WMS_dbModel.FK_tbl_asn_tbl_client" FromRole="tbl_client" ToRole="tbl_asn" />
+        </EntityType>
+        <Association Name="FK">
+          <End Role="tbl_client" Type="Self.tbl_client" Multiplicity="0..1" />
+          <End Role="SKU" Type="Self.SKU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client">
+              <PropertyRef Name="client_name" />
+            </Principal>
+            <Dependent Role="SKU">
+              <PropertyRef Name="client_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SKUs" EntityType="Self.SKU" />
+          <EntitySet Name="tbl_client" EntityType="Self.tbl_client" />
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="tbl_client" EntitySet="tbl_client" />
+            <End Role="SKU" EntitySet="SKUs" />
+          </AssociationSet>
+          <EntitySet Name="tbl_asn" EntityType="WMS_dbModel.tbl_asn" />
+          <AssociationSet Name="FK_tbl_asn_tbl_client" Association="WMS_dbModel.FK_tbl_asn_tbl_client">
+            <End Role="tbl_client" EntitySet="tbl_client" />
+            <End Role="tbl_asn" EntitySet="tbl_asn" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_asn">
+          <Key>
+            <PropertyRef Name="order" />
+          </Key>
+          <Property Name="client_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="arr_date" Type="DateTime" Precision="0" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_client" Relationship="WMS_dbModel.FK_tbl_asn_tbl_client" FromRole="tbl_asn" ToRole="tbl_client" />
+        </EntityType>
+        <Association Name="FK_tbl_asn_tbl_client">
+          <End Type="WMS_dbModel.tbl_client" Role="tbl_client" Multiplicity="1" />
+          <End Type="WMS_dbModel.tbl_asn" Role="tbl_asn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_client">
+              <PropertyRef Name="client_name" />
+            </Principal>
+            <Dependent Role="tbl_asn">
+              <PropertyRef Name="client_name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WMS_dbModelStoreContainer" CdmEntityContainer="WMSEntities">
+          <EntitySetMapping Name="SKUs">
+            <EntityTypeMapping TypeName="WMS_dbModel.SKU">
+              <MappingFragment StoreEntitySet="SKU">
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+                <ScalarProperty Name="SKU1" ColumnName="SKU" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="supplier" ColumnName="supplier" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="image_url" ColumnName="image_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_client">
+            <EntityTypeMapping TypeName="WMS_dbModel.tbl_client">
+              <MappingFragment StoreEntitySet="tbl_client">
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="consumer_email" ColumnName="consumer_email" />
+                <ScalarProperty Name="claim_email" ColumnName="claim_email" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="add_1" ColumnName="add_1" />
+                <ScalarProperty Name="add_2" ColumnName="add_2" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_asn">
+            <EntityTypeMapping TypeName="WMS_dbModel.tbl_asn">
+              <MappingFragment StoreEntitySet="tbl_asn">
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="arr_date" ColumnName="arr_date" />
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

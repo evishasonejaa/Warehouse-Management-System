@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<WMS.tbl_client>
+@using PagedList.Mvc;
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div>
+    <h5 class="text-primary">Client List</h5>
+</div>
+<hr />
+<form action="Index" method="GET" data-toggle="validator" role="form">
+    <div class="row">
+        <div class="col-md-1">
+            @Html.ActionLink("Add New", "Create", "tbl_client", null, new { @class = "btn btn-success" })
+        </div>
+        <div class="col-md-offset-8">
+
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search.." })
+
+        </div>
+
+    </div>
+</form>
+<hr>
+<table class="table table-striped">
+    <tr>
+        <th class="text-primary">
+            @Html.ActionLink("Client Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
+        </th>
+        </th>
+        <th class="text-primary">
+            @Html.ActionLink("Contact Person", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th class="text-primary">
+            Email Id
+        </th>
+        <th class="text-primary">
+            Phone No.
+        </th>
+
+        <th class="text-primary">Edit</th>
+        <th class="text-primary">Delete</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-primary">
+                <a href="@Url.Action("Details", "tbl_client",new { id = item.client_name })">
+                    <span> @item.client_name</span>
+                </a>
+
+            </td>
+            <td class="text-primary">
+                @item.contact_person
+            </td>
+            <td class="text-primary">
+                @item.email
+            </td>
+            <td class="text-primary">
+                @item.phone
+            </td>
+            <td class="text-primary">
+                <a href="@Url.Action("Edit", "tbl_client",new { id = item.client_name })">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </td>
+
+            <td class="text-primary">
+                <a href="@Url.Action("Delete", "tbl_client",new { id = item.client_name })">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
