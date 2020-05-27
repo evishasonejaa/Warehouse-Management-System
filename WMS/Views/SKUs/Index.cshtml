@@ -1,0 +1,114 @@
+﻿
+@model PagedList.IPagedList<WMS.SKU>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h5 class="text-primary">SKU List</h5>
+<hr />
+
+<form action="Index" method="GET" data-toggle="validator" role="form">
+    <div class="row">
+        <div class="col-md-1">
+            @Html.ActionLink("Add New", "Create", "SKUs", null, new { @class = "btn btn-success margin-bottom" })<br />
+
+        </div>
+        <div class="col-md-offset-8">
+
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search.." })
+        </div>
+    </div>
+</form>
+
+
+<hr>
+<table class="table table-striped">
+    <tr>
+        <th class="text-primary">
+
+            @Html.ActionLink("SKU", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th class="text-primary">
+            Description
+        </th>
+        <th class="text-primary">
+            @Html.ActionLink("Client Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th class="text-primary">
+            WMS Qty
+        </th>
+        <th class="text-primary">
+            SO Qty
+        </th>
+        <th class="text-primary">
+            Category
+        </th>
+        <th class="text-primary">
+            Supplier
+        </th>
+        <th class="text-primary">
+            Cost
+        </th>
+        <th class="text-primary">
+            Edit
+        </th>
+        <th class="text-primary">
+            Delete
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-primary">
+                <a href="@Url.Action("Details", "SKUs",new { id = item.SKU1 })">
+                    @item.SKU1
+                </a>
+                <br />
+                <img src="@Url.Content(item.image_url)" alt="Image" height="90" width="90" />
+
+            </td>
+            <td class="text-primary">
+                @item.description
+            </td>
+            <td class="text-primary">
+                @item.client_name
+            </td>
+            <td class="text-primary"></td>
+            <td class="text-primary"></td>
+            <td class="text-primary">
+                @item.category
+            </td>
+            <td class="text-primary">
+                @item.supplier
+            </td>
+            <td class="text-primary">
+                @item.cost
+            </td>
+
+            <td class="text-primary">
+                <a href="@Url.Action("Edit", "SKUs",new { id = item.SKU1 })">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+            </td>
+            <td class="text-primary">
+
+                <a href="@Url.Action("Delete", "SKUs",new { id = item.SKU1 })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

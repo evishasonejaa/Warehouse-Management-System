@@ -1,0 +1,55 @@
+﻿@model WMS.tbl_asn
+
+@{
+    ViewBag.Title = "Edit";
+
+}
+
+<form action="Create" method="POST" data-toggle="validator" role="form">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h5 class="text-primary">Edit ASN</h5>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Client *</label>
+            <div class="col-md-3">
+                @Html.DropDownList("client_name", null, htmlAttributes: new { @class = "form-control", @value = @Model.client_name })
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Purchase Order *</label>
+            <div class="col-md-3">
+                <input type="text" id="order" name="order" value=@Model.order class="form-control" required />
+            </div>
+        </div>
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Arrival Date *</label>
+            <div class="col-md-3">
+                <input type="text" id="arr_date" name="arr_date" value=@Model.arr_date class="form-control" required />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Notes</label>
+            <div class="col-md-3">
+                <textarea id="notes" name="notes" value=@Model.notes class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

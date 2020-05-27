@@ -1,0 +1,177 @@
+﻿@model WMS.tbl_asn
+
+@{
+    ViewBag.Title = "Create";
+
+}
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+</head>
+<body>
+    <form action="Create" method="POST" data-toggle="validator" role="form">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h5 class="text-primary">Add ASN</h5>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group text-primary">
+                <label class="control-label col-md-2">Client *</label>
+                <div class="col-md-3">
+                    <select class="form-control" id="client_name" name="client_name">
+                        <option value="@ViewBag.client_name"></option>
+                    </select>
+                    @*@Html.DropDownList("client_name", null, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+            </div>
+
+            <div class="form-group text-primary">
+                <label class="control-label col-md-2">Purchase Order *</label>
+                <div class="col-md-3">
+                    <input type="text" id="order" name="order" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group text-primary">
+                <label class="control-label col-md-2">Arrival Date *</label>
+                <div class="col-md-3">
+                    <input type="text" id="arr_date" name="arr_date" class="form-control col-md-7" required />
+                    <input type="text" id="arr_date" name="arr_date" class="form-control col-md-4 pull-right" />
+
+                </div>
+            </div>
+
+            <div class="form-group text-primary">
+                <label class="control-label col-md-2">Notes</label>
+                <div class="col-md-3">
+                    <textarea id="notes" name="notes" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="reset" value="Cancel" class="btn btn-primary" />
+                    <input type="button" value="Save" class="btn btn-success" id="submit"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="form2">
+        <hr /><br><br />
+        <h5 class="text-primary">Add ASN</h5>
+        <hr />
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Add SKU</a></li>
+            <li><a href="#">Add Mass SKUs</a></li>
+        </ul>
+        <br />
+        <div class="row">
+            <div class="col-md-1 text-primary">
+                <label class="control-label">SKU:</label>
+            </div>
+            <div class="col-md-3">
+                <select class="form-control"></select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" disabled />
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="QTY" />
+            </div>
+            <div class="col-md-1 pull-right">
+                <input type="button" class="btn btn-success" value="ADD" />
+            </div>
+        </div>
+        <hr />
+        <table class="table">
+            <tr>
+                <th class="text-primary">
+                    SKU
+                </th>
+                <th class="text-primary">
+                    Description
+                </th>
+                <th class="text-primary">
+                    Category
+                </th>
+                <th class="text-primary">
+                    Supplier
+                </th>
+                <th class="text-primary">
+                    Cost
+                </th>
+                <th class="text-primary">
+                    Quantity
+                </th>
+                <th></th>
+            </tr>
+
+            @*  @foreach (var item in model)
+                {
+                    <tr>
+                        <td class="text-primary">
+                            <a href="@Url.Action("Details", "SKUs",new { id = item.SKU1 })">
+                                @item.SKU1
+                            </a>
+                        </td>
+                        <td class="text-primary">
+                            @item.description
+                        </td>
+                        <td class="text-primary">
+                            @item.category
+                        </td>
+                        <td class="text-primary">
+                            @item.supplier
+                        </td>
+                        <td class="text-primary">
+                            @item.cost
+                        </td>
+                        <td class="text-primary">
+
+                        </td>
+                   <td class="text-primary">
+                    <a href="@Url.Action("Delete", "SKUs",new { id = item.SKU1 })">Delete</a>
+                        </td>
+                    </tr>
+                }*@
+
+        </table>
+        <br />
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <script>
+       window.onload=function () {
+            $("#form2").hide();
+        }
+        $("#submit").click(function () {
+            $("#submit").submit();
+                $("#form2").show();
+               
+            
+           });
+
+          $(document).ready(function () {
+              $.get('/tbl_client/Index')
+            .done(function (clients) {
+                $.each(clients.client_name, function (index, client) {
+                    //$("#ClientId").append("<option value='" + client.Id + "'>" + client.ClientName + "</option>");
+                    
+                        $("#client_name").append("<option value='" + client.client_name + "' >" + client.client_name + "</option>");
+                        $("#client_name").find("option:first").remove();
+                  
+                });
+            });
+    });
+ 
+    </script>
+</body>
+</html>

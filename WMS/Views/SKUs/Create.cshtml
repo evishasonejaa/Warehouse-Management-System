@@ -1,0 +1,115 @@
+﻿@model WMS.SKU
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+
+
+
+<form action="Create" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h5 class="text-primary">Add SKU</h5>
+        <hr />
+
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Client *</label>
+            <div class="col-md-3">
+                @Html.DropDownList("client_name", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">SKU *</label>
+            <div class="col-md-3">
+                <input type="text" id="SKU1" name="SKU1" class="form-control" required />
+                
+                        <input type="file" name="file" required />
+                   
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Description *</label>
+            <div class="col-md-3">
+                <textarea id="description" name="description" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Length</label>
+            <div class="col-md-3">
+                <input type="text" id="length" name="length" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Width</label>
+            <div class="col-md-3">
+                <input type="text" id="width" name="width" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Height</label>
+            <div class="col-md-3">
+                <input type="text" id="height" name="height" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Rate</label>
+            <div class="col-md-3">
+                <input type="text" id="rate" name="rate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Supplier</label>
+            <div class="col-md-3">
+                <input type="text" id="supplier" name="supplier" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Cost</label>
+            <div class="col-md-3">
+                <input type="text" id="cost" name="cost" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Category</label>
+            <div class="col-md-3">
+                <input type="text" id="category" name="category" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Notes</label>
+            <div class="col-md-3">
+                <textarea id="notes" name="notes" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="reset" value="Cancel" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

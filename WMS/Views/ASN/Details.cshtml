@@ -1,0 +1,53 @@
+﻿@model WMS.tbl_asn
+
+@{
+    Layout = null;
+}
+
+
+
+<h5 class="text-primary">ASN Details</h5>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="text-primary">
+            Client
+        </dt>
+
+        <dd class="text-primary">
+            @Model.client_name
+        </dd>
+        <dt class="text-primary">
+            Purchase Order
+        </dt>
+
+        <dd class="text-primary">
+            @Model.order
+
+        </dd>
+
+        <dt class="text-primary">
+            Arrival Date
+        </dt>
+
+        <dd class="text-primary">
+            @Model.arr_date
+        </dd>
+
+        <dt class="text-primary">
+            Notes
+        </dt>
+
+        <dd class="text-primary">
+            @Model.notes
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.asn_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+</body>
+</html>

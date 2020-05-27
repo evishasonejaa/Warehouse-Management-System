@@ -1,0 +1,135 @@
+﻿@model WMS.tbl_client
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+
+<form action="Edit" method="POST" data-toggle="validator" role="form">
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h5 class="text-primary">Edit Client</h5>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group  has-feedback">
+            <label class="control-label text-primary col-md-2">Client Name *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="client_name" name="client_name" value=@Model.client_name data-error="Bruh, that email address is invalid" required />
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Contact Person *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="contact_person" name="contact_person" value=@Model.contact_person required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Phone No *</label>
+            <div class="col-md-3">
+                <input type="tel" class="form-control" id="phone" name="phone" value=@Model.phone required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Email Id *</label>
+            <div class="col-md-3">
+                <input type="email" class="form-control" id="email" name="email" value=@Model.email required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Consumer Service Email Id *</label>
+            <div class="col-md-3">
+                <input type="email" class="form-control" id="consumer_email" name="consumer_email" value=@Model.consumer_email required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Claim Email Id *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control " id="claim_email" name="claim_email" value=@Model.claim_email required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Fax No</label>
+            <div class="col-md-3">
+                <input type="tel" class="form-control" id="fax" name="fax" value=@Model.fax />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Address 1 *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="add_1" name="add_1" value=@Model.add_1 required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Address 2</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="add_2" name="add_2" value=@Model.add_2 />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">City *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="city" name="city" value=@Model.city required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Province *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="province" name="province" value=@Model.province required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Country *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="country" name="country" value=@Model.country required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="form-group text-primary">
+            <label class="control-label col-md-2">Zip Code *</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="zip" name="zip" value=@Model.zip required />
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
